@@ -3,6 +3,7 @@ package com.driver.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,6 +29,7 @@ public class Spot {
         this.spotType = spotType;
         this.pricePerHour = pricePerHour;
         this.occupied = false;
+        this.reservationList = new ArrayList<>();
     }
 
     public int getId() {

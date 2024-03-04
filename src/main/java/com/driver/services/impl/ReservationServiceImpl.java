@@ -28,7 +28,7 @@ public class ReservationServiceImpl implements ReservationService {
         Optional<ParkingLot> optionalParkingLot = parkingLotRepository3.findById(parkingLotId);
         Optional<User> optionalUser = userRepository3.findById(userId);
         if(optionalUser.isEmpty() || optionalParkingLot.isEmpty())
-            throw new Exception("Cannot make reservation");
+            throw new Exception();
 
         ParkingLot parkingLot = optionalParkingLot.get();
         User user = optionalUser.get();
@@ -38,7 +38,7 @@ public class ReservationServiceImpl implements ReservationService {
                 .min(Comparator.comparingInt(Spot::getPricePerHour))
                 .orElse(null);
         if(availableSpot == null)
-            throw new Exception("Cannot make reservation");
+            throw new Exception();
 
         Reservation reservation = new Reservation(timeInHours);
         reservation.setSpot(availableSpot);
