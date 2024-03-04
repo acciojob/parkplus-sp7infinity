@@ -20,9 +20,11 @@ public class Payment {
 
     public Payment() {}
 
-    public Payment(PaymentMode paymentMode) {
+    public Payment(Integer id, boolean paymentCompleted, PaymentMode paymentMode, Reservation reservation) {
+        this.id = id;
+        this.paymentCompleted = paymentCompleted;
         this.paymentMode = paymentMode;
-        this.paymentCompleted = true;
+        this.reservation = reservation;
     }
 
     public int getId() {
