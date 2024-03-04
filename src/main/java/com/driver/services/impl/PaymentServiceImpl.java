@@ -30,6 +30,7 @@ public class PaymentServiceImpl implements PaymentService {
         Payment payment = new Payment();
         payment.setPaymentMode(paymentMode);
         payment.setReservation(reservation);
+        payment.setPaymentCompleted(true);
 
         reservation.setPayment(payment);
         reservationRepository2.save(reservation);
