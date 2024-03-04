@@ -12,8 +12,19 @@ public class ParkingLot {
     private String name;
     private String address;
 
-    @OneToMany(mappedBy = "parkingLot",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parkingLot",cascade = CascadeType.ALL, orphanRemoval = true)
     List<Spot> spotList;
+
+    public void removeSpotById(Integer spotId) {
+        spotList.removeIf(spot -> (spot.getId() == spotId));
+    }
+
+    public ParkingLot() {}
+
+    public ParkingLot(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
 
     public int getId() {
         return id;

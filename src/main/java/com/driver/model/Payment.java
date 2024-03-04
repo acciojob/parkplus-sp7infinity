@@ -1,5 +1,7 @@
 package com.driver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,10 +12,18 @@ public class Payment {
 
     @OneToOne
     @JoinColumn
+    //@JsonIgnore
     private Reservation reservation;
 
     boolean paymentCompleted;
     PaymentMode paymentMode;
+
+    public Payment() {}
+
+    public Payment(PaymentMode paymentMode) {
+        this.paymentMode = paymentMode;
+        this.paymentCompleted = true;
+    }
 
     public int getId() {
         return id;
