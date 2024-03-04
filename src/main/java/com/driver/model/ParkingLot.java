@@ -20,15 +20,6 @@ public class ParkingLot {
         spotList.removeIf(spot -> (spot.getId() == spotId));
     }
 
-    public ParkingLot() {}
-
-    public ParkingLot(Integer id, String name, String address, List<Spot> spotList) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.spotList = spotList;
-    }
-
     public int getId() {
         return id;
     }

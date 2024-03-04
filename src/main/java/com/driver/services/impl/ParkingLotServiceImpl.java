@@ -1,6 +1,7 @@
 package com.driver.services.impl;
 
 import com.driver.model.ParkingLot;
+import com.driver.model.Reservation;
 import com.driver.model.Spot;
 import com.driver.model.SpotType;
 import com.driver.repository.ParkingLotRepository;
@@ -22,8 +23,10 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     @Override
     public ParkingLot addParkingLot(String name, String address) {
         ParkingLot newParkingLot = new ParkingLot();
+        List<Spot> spotList = new ArrayList<>();
         newParkingLot.setName(name);
         newParkingLot.setAddress(address);
+        newParkingLot.setSpotList(spotList);
         return parkingLotRepository1.save(newParkingLot);
     }
 
@@ -31,12 +34,15 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     public Spot addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
         ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
         SpotType spotType;
+        List<Reservation> reservationList = new ArrayList<>();
 
         if(numberOfWheels <= 2) spotType = SpotType.TWO_WHEELER;
         else if(numberOfWheels <= 4) spotType = SpotType.FOUR_WHEELER;
         else spotType = SpotType.OTHERS;
 
         Spot newSpot = new Spot();
+        newSpot.setOccupied(false);
+        newSpot.setReservationList(reservationList);
         newSpot.setSpotType(spotType);
         newSpot.setPricePerHour(pricePerHour);
         newSpot.setParkingLot(parkingLot);
@@ -49,13 +55,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
     @Override
     public void deleteSpot(int spotId) {
-        Optional<Spot> optionalSpot = spotRepository1.findById(spotId);
-        if(optionalSpot.isEmpty())
-            return;
-        Spot spot = optionalSpot.get();
-        ParkingLot parkingLot = spot.getParkingLot();
-        parkingLot.removeSpotById(spotId);
-        parkingLotRepository1.save(parkingLot);
+        spotRepository1.deleteById(spotId);
     }
 
     @Override
