@@ -25,16 +25,16 @@ public class ReservationServiceImpl implements ReservationService {
     ParkingLotRepository parkingLotRepository3;
     @Override
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels) throws Exception {
-        Optional<ParkingLot> optionalParkingLot = parkingLotRepository3.findById(parkingLotId);
-        if(optionalParkingLot.isEmpty())
-            throw new Exception("Cannot make reservation");
+//        Optional<ParkingLot> optionalParkingLot = parkingLotRepository3.findById(parkingLotId);
+//        if(optionalParkingLot.isEmpty())
+//            throw new Exception("Cannot make reservation");
+//
+//        Optional<User> optionalUser = userRepository3.findById(userId);
+//        if(optionalUser.isEmpty())
+//            throw new Exception("Cannot make reservation");
 
-        Optional<User> optionalUser = userRepository3.findById(userId);
-        if(optionalUser.isEmpty())
-            throw new Exception("Cannot make reservation");
-
-        ParkingLot parkingLot = optionalParkingLot.get();
-        User user = optionalUser.get();
+        ParkingLot parkingLot = parkingLotRepository3.findById(parkingLotId).get();
+        User user = userRepository3.findById(userId).get();
 
         Spot availableSpot = parkingLot.getSpotList().stream()
                 .filter(spot -> (!spot.getOccupied() && isCorrectSpotType(spot.getSpotType(), numberOfWheels)))

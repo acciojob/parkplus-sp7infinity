@@ -1,6 +1,7 @@
 package com.driver.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,7 @@ public class User {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.reservationList = new ArrayList<>();
     }
 
     public int getId() {
