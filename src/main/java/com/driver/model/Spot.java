@@ -25,11 +25,13 @@ public class Spot {
 
     public Spot() {}
 
-    public Spot(SpotType spotType, Integer pricePerHour) {
+    public Spot(Integer id, SpotType spotType, int pricePerHour, boolean occupied, ParkingLot parkingLot, List<Reservation> reservationList) {
+        this.id = id;
         this.spotType = spotType;
         this.pricePerHour = pricePerHour;
-        this.occupied = false;
-        this.reservationList = new ArrayList<>();
+        this.occupied = occupied;
+        this.parkingLot = parkingLot;
+        this.reservationList = reservationList;
     }
 
     public int getId() {

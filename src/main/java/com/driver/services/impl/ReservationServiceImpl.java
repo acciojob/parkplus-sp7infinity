@@ -40,8 +40,8 @@ public class ReservationServiceImpl implements ReservationService {
                 .filter(spot -> (!spot.getOccupied() && isCorrectSpotType(spot.getSpotType(), numberOfWheels)))
                 .min(Comparator.comparingInt(Spot::getPricePerHour))
                 .orElse(null);
-        if(availableSpot == null)
-            throw new Exception("Cannot make reservation");
+//        if(availableSpot == null)
+//            throw new Exception("Cannot make reservation");
 
         Reservation reservation = new Reservation(timeInHours);
         reservation.setSpot(availableSpot);
